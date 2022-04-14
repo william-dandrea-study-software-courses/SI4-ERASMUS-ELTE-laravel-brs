@@ -19,6 +19,15 @@ class Borrow extends Model
         'return_managed_by',
     ];
 
+
+    public static function getActiveBookRentals() {
+
+        return Borrow::all()->where('status', '=', 'ACCEPTED');
+
+    }
+
+
+
     public function reader() {
         return $this->belongsTo(User::class, 'reader_id', 'reader_id');
     }

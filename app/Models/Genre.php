@@ -16,5 +16,7 @@ class Genre extends Model
     protected $fillable = ['name', 'style'];
 
 
-
+    public function books() {
+        return $this->belongsToMany(Book::class);
+    }
 }
