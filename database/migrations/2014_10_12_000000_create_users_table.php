@@ -9,6 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
+     *  id
+        name (string)
+        email (string, unique)
+        email_verified_at (timestamp, nullable)
+        password (string)
+        is_librarian (boolean, default:false)
+        remember_token
+        timestamps (created_at, updated_at)
+     *
      * @return void
      */
     public function up()
@@ -19,6 +28,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_librarian')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
