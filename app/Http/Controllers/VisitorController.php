@@ -27,7 +27,7 @@ class VisitorController extends Controller
             'numberOfGenres' => Genre::all()->count(),
             'numberOfBooks' => Book::all()->count(),
             'numberOfActiveBookRentals' => Borrow::getActiveBookRentals()->count(),
-            'listOfGenres' => ['yo', 'yo2']
+            'listOfGenres' => Genre::all(),
         ]);
     }
 }

@@ -8,8 +8,8 @@
         {{ $numberOfBooks }} Books in the system<br>
         {{ $numberOfActiveBookRentals }} Active rentals in the system<br>
 
-        @foreach($listOfGenres as $value)
-            {{ $value }} Genre<br>
+        @foreach($listOfGenres as $genre)
+            {{ $genre->name }} : {{ $genre->books->count() }} Books ( {{ $genre->id }} ) <br>
         @endforeach
     </div>
 
