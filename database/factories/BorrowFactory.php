@@ -45,9 +45,9 @@ class BorrowFactory extends Factory
             'deadline' => $this->faker->dateTime()->setTimestamp((new \DateTime)->getTimestamp() + 10000),
             'returned_at' => $this->faker->randomElement([NULL, (new \DateTime)->getTimestamp() + 5000]),
             'book_id' => Book::all()->random()->id,
-            'reader_id' => User::all()->random()->id,
-            'request_managed_by' => User::all()->random()->id,
-            'return_managed_by' => User::all()->random()->id,
+            'reader_id' => User::readers()->random()->id,
+            'request_managed_by' => User::librarians()->random()->id,
+            'return_managed_by' => User::librarians()->random()->id,
         ];
     }
 }
