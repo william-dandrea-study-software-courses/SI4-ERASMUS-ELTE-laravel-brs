@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Borrow;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class BorrowSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,10 +15,6 @@ class BorrowSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-
-        Borrow::factory()
-            ->count(10)
-            ->create();
+        User::factory(10)->create();
     }
 }
