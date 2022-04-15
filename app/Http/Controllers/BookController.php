@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
 
@@ -23,9 +24,12 @@ class BookController extends Controller
     }
 
     public function byGenre(Request $request, $id) {
-        print_r($id);
+
+        $genre = Genre::all()->where('id', $id)->first();
+
+
         return view('book.books', [
-            'books' => Book::all(),
+            'books' => $genre->books,
         ]);
 
     }
