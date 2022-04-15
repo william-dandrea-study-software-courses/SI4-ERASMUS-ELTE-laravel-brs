@@ -14,9 +14,19 @@ class  BorrowController extends Controller
 
     public function select(Request $request, $id) {
 
-        $borrow = Borrow::all()->where('id', '=', $id)->first();
-        $book = Book::all()->where('id', '=', $borrow->reader_id)->first();
+        $borrow = Borrow::all()
+            ->where('id', '=', $id)
+            ->first();
+
+
+
+        $book = Book::all()
+            ->where('id', '=', $borrow->book_id)
+            ->first();
+
         $reader = User::all()->where('id', '=', $borrow->reader_id)->first();
+
+
 
         $pendingLibrarian = null;
         $returnedLibrarian = null;
@@ -45,36 +55,36 @@ class  BorrowController extends Controller
         // title, author, date of rental, and the deadline
 
 
-        $pendingBooks = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+        $pendingRental = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
             ->where('borrows.reader_id', '=', auth()->user()->id)
             ->where('borrows.status', '=', 'PENDING')
-            ->get(['borrows.id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
 
         $acceptedAndInTimeRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
             ->where('borrows.reader_id', '=', auth()->user()->id)
             ->where('borrows.status', '=', 'ACCEPTED')
-            ->where('borrows.deadline', '>', now())
-            ->get(['borrows.id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+            ->where('borrows.deadline', '>', now()->timestamp)
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
 
         $acceptedLateRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
             ->where('borrows.reader_id', '=', auth()->user()->id)
             ->where('borrows.status', '=', 'ACCEPTED')
-            ->where('borrows.deadline', '<', now())
-            ->get(['borrows.id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+            ->where('borrows.deadline', '<', now()->timestamp)
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
 
         $rejectedRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
             ->where('borrows.reader_id', '=', auth()->user()->id)
             ->where('borrows.status', '=', 'REJECTED')
-            ->get(['borrows.id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
 
         $returnedRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
             ->where('borrows.reader_id', '=', auth()->user()->id)
             ->where('borrows.status', '=', 'RETURNED')
-            ->get(['borrows.id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
 
 
         return view('rentals.rentals-reader', [
-            'pendingBooks' => $pendingBooks,
+            'pendingRentals' => $pendingRental,
             'acceptedAndInTimeRentals' => $acceptedAndInTimeRentals,
             'acceptedLateRentals' => $acceptedLateRentals,
             'rejectedRentals' => $rejectedRentals,

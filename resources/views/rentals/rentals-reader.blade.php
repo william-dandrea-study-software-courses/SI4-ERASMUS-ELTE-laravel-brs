@@ -14,16 +14,17 @@
                         Pending requests
                     </div>
                     <ul class="list-group list-group-flush">
-                        @foreach($pendingBooks as $pendingBook)
+                        @foreach($pendingRentals as $pendingRental)
                             <li class="list-group-item">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$pendingBook->title}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingBook->authors}}</h6>
-                                        <p class="card-text">Rent date : {{Carbon\Carbon::parse($pendingBook->request_processed_at)->format('Y-m-d')}}</p>
-                                        <a href="{{route('rental', ['id' => $pendingBook->id])}}" class="btn btn-info">See details</a>
+                                        <h5 class="card-title">{{$pendingRental->title}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingRental->authors}}</h6>
+                                        <p class="card-text">Rent date : {{ $pendingRental->request_processed_at }}</p>
 
-                                        <div class="card-footer w-100">Deadline : {{Carbon\Carbon::parse(@$pendingBook->deadline)->format('Y-m-d')}}</div>
+                                        <a href="{{route('rental', ['id' => $pendingRental->borrow_id])}}" class="btn btn-info">See details</a>
+
+                                        <div class="card-footer w-100">Deadline : {{ $pendingRental->deadline}}</div>
                                     </div>
                                 </div>
                             </li>
@@ -38,16 +39,17 @@
                     <div class="card-header">
                         Accepted and in-time rentals
                     </div>
-                    @foreach($acceptedAndInTimeRentals as $pendingBook)
+                    @foreach($acceptedAndInTimeRentals as $pendingRental)
                         <li class="list-group-item">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{$pendingBook->title}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{$pendingBook->authors}}</h6>
-                                    <p class="card-text">Rent date : {{Carbon\Carbon::parse($pendingBook->request_processed_at)->format('Y-m-d')}}</p>
-                                    <a href="{{route('rental', ['id' => $pendingBook->id])}}" class="btn btn-info">See details</a>
+                                    <h5 class="card-title">{{$pendingRental->title}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{$pendingRental->authors}}</h6>
+                                    <p class="card-text">Rent date : {{ $pendingRental->request_processed_at }}</p>
 
-                                    <div class="card-footer w-100">Deadline : {{Carbon\Carbon::parse(@$pendingBook->deadline)->format('Y-m-d')}}</div>
+                                    <a href="{{route('rental', ['id' => $pendingRental->borrow_id])}}" class="btn btn-info">See details</a>
+
+                                    <div class="card-footer w-100">Deadline : {{ $pendingRental->deadline}}</div>
                                 </div>
                             </div>
                         </li>
@@ -63,16 +65,17 @@
                         Accepted late rentals
                     </div>
                     <ul class="list-group list-group-flush">
-                        @foreach($acceptedLateRentals as $pendingBook)
+                        @foreach($acceptedLateRentals as $pendingRental)
                             <li class="list-group-item">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$pendingBook->title}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingBook->authors}}</h6>
-                                        <p class="card-text">Rent date : {{Carbon\Carbon::parse($pendingBook->request_processed_at)->format('Y-m-d')}}</p>
-                                        <a href="{{route('rental', ['id' => $pendingBook->id])}}" class="btn btn-info">See details</a>
+                                        <h5 class="card-title">{{$pendingRental->title}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingRental->authors}}</h6>
+                                        <p class="card-text">Rent date : {{ $pendingRental->request_processed_at }}</p>
 
-                                        <div class="card-footer w-100">Deadline : {{Carbon\Carbon::parse(@$pendingBook->deadline)->format('Y-m-d')}}</div>
+                                        <a href="{{route('rental', ['id' => $pendingRental->borrow_id])}}" class="btn btn-info">See details</a>
+
+                                        <div class="card-footer w-100">Deadline : {{ $pendingRental->deadline}}</div>
                                     </div>
                                 </div>
                             </li>
@@ -91,16 +94,17 @@
                         Rejected rental requests
                     </div>
                     <ul class="list-group list-group-flush">
-                        @foreach($rejectedRentals as $pendingBook)
+                        @foreach($rejectedRentals as $pendingRental)
                             <li class="list-group-item">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$pendingBook->title}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingBook->authors}}</h6>
-                                        <p class="card-text">Rent date : {{Carbon\Carbon::parse($pendingBook->request_processed_at)->format('Y-m-d')}}</p>
-                                        <a href="{{route('rental', ['id' => $pendingBook->id])}}" class="btn btn-info">See details</a>
+                                        <h5 class="card-title">{{$pendingRental->title}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingRental->authors}}</h6>
+                                        <p class="card-text">Rent date : {{ $pendingRental->request_processed_at }}</p>
 
-                                        <div class="card-footer w-100">Deadline : {{Carbon\Carbon::parse(@$pendingBook->deadline)->format('Y-m-d')}}</div>
+                                        <a href="{{route('rental', ['id' => $pendingRental->borrow_id])}}" class="btn btn-info">See details</a>
+
+                                        <div class="card-footer w-100">Deadline : {{ $pendingRental->deadline}}</div>
                                     </div>
                                 </div>
                             </li>
@@ -116,16 +120,17 @@
                         Returned rentals
                     </div>
                     <ul class="list-group list-group-flush">
-                        @foreach($returnedRentals as $pendingBook)
+                        @foreach($returnedRentals as $pendingRental)
                             <li class="list-group-item">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$pendingBook->title}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingBook->authors}}</h6>
-                                        <p class="card-text">Rent date : {{Carbon\Carbon::parse($pendingBook->request_processed_at)->format('Y-m-d')}}</p>
-                                        <a href="{{route('rental', ['id' => $pendingBook->id])}}" class="btn btn-info">See details</a>
+                                        <h5 class="card-title">{{$pendingRental->title}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{$pendingRental->authors}}</h6>
+                                        <p class="card-text">Rent date : {{ $pendingRental->request_processed_at }}</p>
 
-                                        <div class="card-footer w-100">Deadline : {{Carbon\Carbon::parse(@$pendingBook->deadline)->format('Y-m-d')}}</div>
+                                        <a href="{{route('rental', ['id' => $pendingRental->borrow_id])}}" class="btn btn-info">See details</a>
+
+                                        <div class="card-footer w-100">Deadline : {{ $pendingRental->deadline}}</div>
                                     </div>
                                 </div>
                             </li>
