@@ -12,6 +12,43 @@ class  BorrowController extends Controller
 {
 
 
+    public function librarianManageAllRentals() {
+
+        $pendingRental = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+            ->where('borrows.status', '=', 'PENDING')
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+
+        $acceptedAndInTimeRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+            ->where('borrows.status', '=', 'ACCEPTED')
+            ->where('borrows.deadline', '>', now()->timestamp)
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+
+        $acceptedLateRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+            ->where('borrows.status', '=', 'ACCEPTED')
+            ->where('borrows.deadline', '<', now()->timestamp)
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+
+        $rejectedRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+            ->where('borrows.status', '=', 'REJECTED')
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+
+        $returnedRentals = Book::join('borrows', 'books.id', '=', 'borrows.book_id')
+            ->where('borrows.status', '=', 'RETURNED')
+            ->get(['books.id AS book_id', 'borrows.id AS borrow_id', 'borrows.request_processed_at', 'borrows.deadline', 'books.title', 'books.authors']);
+
+
+
+        return view('rentals.manage-all-rentals', [
+            'pendingRentals' => $pendingRental,
+            'acceptedAndInTimeRentals' => $acceptedAndInTimeRentals,
+            'acceptedLateRentals' => $acceptedLateRentals,
+            'rejectedRentals' => $rejectedRentals,
+            'returnedRentals' => $returnedRentals,
+        ]);
+
+    }
+
+
     public function select(Request $request, $id) {
 
         $borrow = Borrow::all()

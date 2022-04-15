@@ -4,6 +4,20 @@
 
     <div class="m-5">
 
+        @if(Auth::user())
+            @if(auth()->user()->isLibrarian())
+
+
+                <form action="{{ route('create-book') }}" method="get">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Add book</button>
+                </form>
+
+
+            @endif
+        @endif
+
+
 
         @if(count($books) != 0)
             <div class="row hidden-md-up">

@@ -26,13 +26,6 @@ Auth::routes();
 
 
 
-// Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
-Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
-Route::get('/books', [BookController::class, 'all'])->name('books');
-Route::get('/book-search/', [BookController::class, 'search'])->name('book-search');
-Route::get('/book/{id}', [BookController::class, 'book']);
-
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
@@ -42,9 +35,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/borrow/create/{bookId}', [BorrowController::class, 'create'])->name('borrow-new-book')->middleware('isUserAndNotLibrarian');
     Route::get('/rentals', [BorrowController::class, 'all'])->name('rentals-user')->middleware('isUserAndNotLibrarian');
 
+    Route::get('/rentals/manage-all-rentals',  [BorrowController::class, 'librarianManageAllRentals'])->name('manage-all-rentals')->middleware('isLibrarian');
     Route::get('/rentals/{id}', [BorrowController::class, 'select'])->name('rental');
 
+
+    Route::get('/book/create', [BookController::class, 'create'])->name('create-book')->middleware('isLibrarian');
+    Route::post('/book/store', [BookController::class, 'store'])->name('store-book')->middleware('isLibrarian');
     Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('delete-book')->middleware('isLibrarian');
+
 
 
     Route::get('/genres', [GenreController::class, 'index'])->name('genres')->middleware('isLibrarian');
@@ -56,6 +54,12 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
+// Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
+Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
+Route::get('/books', [BookController::class, 'all'])->name('books');
+Route::get('/book-search/', [BookController::class, 'search'])->name('book-search');
+Route::get('/book/{id}', [BookController::class, 'oneBook']);
 
 
 

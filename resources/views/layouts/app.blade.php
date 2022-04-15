@@ -106,12 +106,9 @@
 
                             @if(Auth::user()->isLibrarian())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Manage Rentals</a>
+                                    <a class="nav-link" href="{{ route('manage-all-rentals') }}">Manage Rentals</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Manage Books</a>
-                                </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('genres') }}">Manage Genres</a>

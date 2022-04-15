@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookFormRequest;
+use App\Http\Requests\GenreFormRequest;
 use App\Models\Book;
 use App\Models\Borrow;
 use App\Models\Genre;
@@ -11,6 +13,25 @@ use Ramsey\Uuid\Type\Integer;
 class BookController extends Controller
 {
 
+    public function create() {
+        $genres = Genre::all();
+
+        return view('book.bookcreate', [
+            'genres' => $genres,
+        ]);
+    }
+
+
+    public function store(BookFormRequest $request) {
+        $data = $request->validated();
+
+        dd($data->genres);
+
+        Book::create($data);
+        return redirect()->route('books');
+    }
+
+
 
     public function destroy($bookId) {
         $book = Book::findOrFail($bookId);
@@ -19,7 +40,7 @@ class BookController extends Controller
     }
 
 
-    public function book(Request $request, $id) {
+    public function oneBook(Request $request, $id) {
 
         $book = Book::findOrFail($id);
 
