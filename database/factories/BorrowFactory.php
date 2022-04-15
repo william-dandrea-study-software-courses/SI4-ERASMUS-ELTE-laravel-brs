@@ -42,8 +42,8 @@ class BorrowFactory extends Factory
         return [
             'status' => $this->faker->randomElement(['PENDING', 'REJECTED', 'ACCEPTED', 'RETURNED']),
             'request_processed_at' => $this->faker->dateTime(),
-            'deadline' => $this->faker->dateTime()->setTimestamp((new \DateTime)->getTimestamp() + 10000),
-            'returned_at' => $this->faker->randomElement([NULL, (new \DateTime)->getTimestamp() + 5000]),
+            'deadline' => $this->faker->dateTime()->setTimestamp(now()->getTimestamp() + $this->faker->numberBetween(1, 40320000)),
+            'returned_at' => $this->faker->randomElement([NULL, now()->getTimestamp() + $this->faker->numberBetween(40320000, 80320000)]),
             'book_id' => Book::all()->random()->id,
             'reader_id' => User::readers()->random()->id,
             'request_managed_by' => User::librarians()->random()->id,

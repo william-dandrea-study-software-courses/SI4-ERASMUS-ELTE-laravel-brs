@@ -2,9 +2,9 @@
 
 @section('content')
 
+    <div class="h1 p-4">My Rentals</div>
 
 
-    Rentallssssss
 
 
 @endsection
