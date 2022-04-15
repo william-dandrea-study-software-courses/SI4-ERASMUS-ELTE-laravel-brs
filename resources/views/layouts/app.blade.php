@@ -132,7 +132,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profil') }}">Profil</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
 
