@@ -114,7 +114,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Manage Genres</a>
+                                    <a class="nav-link" href="{{ route('genres') }}">Manage Genres</a>
                                 </li>
                             @else
                                 <li class="nav-item">

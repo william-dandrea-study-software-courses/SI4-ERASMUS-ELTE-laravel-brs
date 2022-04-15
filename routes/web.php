@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\VisitorController;
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('delete-book')->middleware('isLibrarian');
 
+
+    Route::get('/genres', [GenreController::class, 'index'])->name('genres')->middleware('isLibrarian');
+    Route::delete('/genres/destroy/{id}', [GenreController::class, 'destroy'])->name('delete-genre')->middleware('isLibrarian');
 
 });
 
