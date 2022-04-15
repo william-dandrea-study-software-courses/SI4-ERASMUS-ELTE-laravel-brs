@@ -2,12 +2,38 @@
 
 @section('content')
 
+
+
     <div class="container">
         <div class="row align-items-start">
             <div class="col">
                 <img src="{{$book->cover_image}}" class="img-fluid" alt="...">
             </div>
             <div class="col">
+
+                @if($user != 0)
+
+                    <div class="card m-5">
+
+                        @if($user == 1)
+
+                            @if($borrowed_by_current_user != null)
+                                You borrowed this book, status : {{ $borrowed_by_current_user }}
+                            @else
+                                <button type="button" class="btn btn-primary">Borrow book</button>
+                            @endif
+
+
+
+                        @else
+                            <button type="button" class="btn btn-secondary">Edit book</button>
+                            <button type="button" class="btn btn-danger">Delete book</button>
+                        @endif
+
+
+                    </div>
+                @endif
+
 
                 <div class="card">
                     <div class="card-header"><h3 class="card-title ">{{$book->title}}</h3></div>

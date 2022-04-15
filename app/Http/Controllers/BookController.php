@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Borrow;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
@@ -18,8 +19,29 @@ class BookController extends Controller
 
         $book = Book::all()->where('id', $id)->first();
 
+
+        $borrowed = null;
+        $user = 0;
+        if (auth()->user()) {
+            $user = auth()->user()->isLibrarian() ? 2 : 1;
+
+            $borrowed = Borrow::all()
+                ->where('reader_id', '=', auth()->user()->id)
+                ->where('book_id', '=', $id)
+                ->sortBy('deadline', SORT_NATURAL);
+
+
+            $borrowed = $borrowed->first();
+            if ($borrowed) {
+                $borrowed = $borrowed->status;
+            }
+        }
+
+
         return view('book.book-description', [
             'book' => $book,
+            'user' => $user,
+            'borrowed_by_current_user' => $borrowed,
         ]);
 
     }
