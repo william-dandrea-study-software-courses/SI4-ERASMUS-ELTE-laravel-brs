@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
 
+    public function edit($genreId) {
+        $genre = Genre::findOrFail($genreId);
+
+        return view('genres.genre-edit', [
+            'genre' => $genre,
+        ]);
+    }
+
+    public function update(GenreFormRequest $request, $genreId) {
+
+        $genre = Genre::findOrFail($genreId);
+        $genre->update($request->validated());
+
+        return redirect()->route('genres');
+    }
+
     public function store(GenreFormRequest $request) {
         $data = $request->validated();
         Genre::create($data);

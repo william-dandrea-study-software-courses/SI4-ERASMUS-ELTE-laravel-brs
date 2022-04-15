@@ -21,7 +21,11 @@
                     <p>Style : {{ $genre->style }}</p>
 
 
-                    <button type="button" class="btn btn-warning">Edit Genre</button>
+                    <form action="{{ route('edit-genre', ['id' =>$genre->id]) }}" method="get">
+                        @csrf
+                        <button type="submit" class="btn btn-warning">Edit Genre</button>
+                    </form>
+
 
                     <form action="{{ route('delete-genre', ['id' =>$genre->id]) }}" method="post">
                         @csrf
