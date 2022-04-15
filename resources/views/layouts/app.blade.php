@@ -118,7 +118,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">My Rentals</a>
+                                    <a class="nav-link" href="{{route('rentals-user')}}">My Rentals</a>
                                 </li>
                             @endif
 

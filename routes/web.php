@@ -38,7 +38,8 @@ Route::middleware(['auth'])->group(function () {
 
     // ->middleware('isLibrarian')
 
-    Route::post('/borrow/create/{bookId}', [BorrowController::class, 'create'])->name('borrow-new-book');
+    Route::post('/borrow/create/{bookId}', [BorrowController::class, 'create'])->name('borrow-new-book')->middleware('isUserAndNotLibrarian');
+    Route::get('/rentals', [BorrowController::class, 'all'])->name('rentals-user')->middleware('isUserAndNotLibrarian');
 
 
 });

@@ -11,7 +11,11 @@ class BorrowController extends Controller
 
 
 
+    public function all() {
 
+        return view('user.rentals');
+
+    }
 
 
     public function create(Request $request, $bookId) {
