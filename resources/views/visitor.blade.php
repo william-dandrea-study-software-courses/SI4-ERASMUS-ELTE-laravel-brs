@@ -4,19 +4,52 @@
 
 
 
-    <div class="m-5">
-        {{ $numberOfUsersInTheSystem }} Users in the system <br>
-        {{ $numberOfGenres }} Genres in the system<br>
-        {{ $numberOfBooks }} Books in the system<br>
-        {{ $numberOfActiveBookRentals }} Active rentals in the system<br>
+    <div class="m-5 row">
 
-        @foreach($listOfGenres as $genre)
+        <div class="card col m-1">
+            <div class="card-body">
+                <h5 class="card-title card-header">Number of users in the system</h5>
+                <h6 class="card-subtitle m-2">{{ $numberOfUsersInTheSystem }}</h6>
+            </div>
+        </div>
 
-            <a href="{{ url('books-genre/'.$genre->id) }}">
+        <div class="card col m-1">
+            <div class="card-body">
+                <h5 class="card-title card-header">Number of genres in the system</h5>
+                <h6 class="card-subtitle m-2">{{ $numberOfGenres }}</h6>
 
-            {{ $genre->name }} : {{ $genre->books->count() }} Books ( {{ $genre->id }} )
-            </a> <br>
-        @endforeach
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach($listOfGenres as $genre)
+
+                            <li class="list-group-item">
+                                <a href="{{ url('books-genre/'.$genre->id) }}">{{ $genre->name }}</a> : {{ $genre->books->count() }} books
+                            </li>
+
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col m-1">
+            <div class="card-body">
+                <h5 class="card-title card-header">Number of books in the system</h5>
+                <h6 class="card-subtitle m-2">{{ $numberOfBooks }}</h6>
+            </div>
+        </div>
+
+        <div class="card col m-1">
+            <div class="card-body">
+                <h5 class="card-title card-header">Number of active rentals in the system</h5>
+                <h6 class="card-subtitle m-2">{{ $numberOfActiveBookRentals }}</h6>
+            </div>
+        </div>
+
+
+
+
+
     </div>
 
 @endsection
