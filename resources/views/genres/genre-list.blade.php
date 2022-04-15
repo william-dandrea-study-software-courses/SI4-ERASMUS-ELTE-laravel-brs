@@ -6,7 +6,11 @@
 
     <div class="h1 p-4">Genre</div>
 
-    <button type="button" class="btn btn-primary m-1">Add new genre</button>
+
+    <form action="{{route('create-genre') }}" method="get">
+        @csrf
+        <button type="submit" class="btn btn-primary">Add new genre</button>
+    </form>
 
 
     <div class="card w-100 m-5">

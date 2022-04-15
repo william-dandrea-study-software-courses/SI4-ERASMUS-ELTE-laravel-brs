@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/genres', [GenreController::class, 'index'])->name('genres')->middleware('isLibrarian');
     Route::delete('/genres/destroy/{id}', [GenreController::class, 'destroy'])->name('delete-genre')->middleware('isLibrarian');
+    Route::get('/genres/create', [GenreController::class, 'create'])->name('create-genre')->middleware('isLibrarian');
+    Route::post('/genres/store', [GenreController::class, 'store'])->name('store-genre')->middleware('isLibrarian');
 
 });
 
