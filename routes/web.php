@@ -36,7 +36,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 
+    // ->middleware('isLibrarian')
+
     Route::post('/borrow/create/{bookId}', [BorrowController::class, 'create'])->name('borrow-new-book');
+
+
 });
 
 
