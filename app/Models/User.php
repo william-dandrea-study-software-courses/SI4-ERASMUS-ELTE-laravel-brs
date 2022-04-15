@@ -43,6 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isLibrarian() {
+        return $this->is_librarian;
+    }
+
 
     public function readerBorrows() {
         return $this->hasMany(Borrow::class, 'reader_id');

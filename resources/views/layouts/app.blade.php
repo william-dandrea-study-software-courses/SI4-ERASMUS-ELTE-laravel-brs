@@ -22,24 +22,18 @@
 
 
 
-<body>
+<body class="bg-gradient">
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">WilBRS</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <!---------------------------------------- Left Side Of Navbar ---------------------------------------->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
 
 
 
-                <!-------------------------------------- Right Side Of Navbar ----------------------------------------->
-                <ul class="navbar-nav ml-auto">
 
-                    <!-- Authentication Links -->
+                <!-------------------------------------- Right Side Of Navbar ---------------------------------------
+
+              <a class="navbar-brand" href="{{ url('/') }}">WilBRS</a>
+                    <ul class="navbar-nav ml-auto">--
+
+
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -51,10 +45,10 @@
                         @endif
                     @else
                         <li>
-                            <!--
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+
                                 {{ Auth::user()->name }} <span class="caret"></span>
-                            </a> -->
+
 
                             <div class="float-sm-right">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -67,14 +61,122 @@
                         </li>
                     @endguest
                 </ul>
-                <!-------------------------------------- -------------------- ----------------------------------------->
+
+                -->
 
 
 
 
+
+
+
+
+
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url('/') }}">WilBRS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('books') }}">Books</a>
+                            </li>
+
+                        @guest <!-- If the user is not logged -->
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+
+                        @else <!-- If the user is logged -->
+
+
+
+                            @if(Auth::user()->isLibrarian())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Manage Rentals</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Manage Books</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Manage Genres</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">My Rentals</a>
+                                </li>
+                            @endif
+
+
+
+
+
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        @endguest
+
+
+
+
+
+                    </ul>
+
+                    <form class="d-flex" action="{{ route('book-search') }}" method="GET">
+                        @csrf
+                        <input class="form-control me-2" name="book-search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+
+
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <main class="py-4">
         @yield('content')

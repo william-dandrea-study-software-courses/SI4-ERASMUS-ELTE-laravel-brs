@@ -9,7 +9,11 @@
         {{ $numberOfActiveBookRentals }} Active rentals in the system<br>
 
         @foreach($listOfGenres as $genre)
-            {{ $genre->name }} : {{ $genre->books->count() }} Books ( {{ $genre->id }} ) <br>
+
+            <a href="{{ url('books-genre/'.$genre->id) }}">
+
+            {{ $genre->name }} : {{ $genre->books->count() }} Books ( {{ $genre->id }} )
+            </a> <br>
         @endforeach
     </div>
 

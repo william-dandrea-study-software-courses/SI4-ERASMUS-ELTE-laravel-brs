@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
@@ -35,4 +36,9 @@ class Book extends Model
     public function genres() {
         return $this->belongsToMany(Genre::class);
     }
+
+
+
+
+
 }

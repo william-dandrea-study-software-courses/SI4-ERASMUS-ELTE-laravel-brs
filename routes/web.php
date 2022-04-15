@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Auth;
@@ -20,4 +21,18 @@ Route::get('/',  [VisitorController::class, 'view']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+// Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
+Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
+Route::get('/books', [BookController::class, 'all'])->name('books');
+Route::get('/book-search/', [BookController::class, 'search'])->name('book-search');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+
+
+
