@@ -12,12 +12,16 @@ class BookController extends Controller
 {
 
 
-
+    public function destroy($bookId) {
+        $book = Book::findOrFail($bookId);
+        $book->delete();
+        return redirect()->route('books');
+    }
 
 
     public function book(Request $request, $id) {
 
-        $book = Book::all()->where('id', $id)->first();
+        $book = Book::findOrFail($id);
 
         $borrowed = null;
         $user = 0;

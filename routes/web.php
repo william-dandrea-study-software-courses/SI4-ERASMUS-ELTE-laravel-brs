@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/rentals/{id}', [BorrowController::class, 'select'])->name('rental');
 
+    Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('delete-book')->middleware('isLibrarian');
+
 
 });
 

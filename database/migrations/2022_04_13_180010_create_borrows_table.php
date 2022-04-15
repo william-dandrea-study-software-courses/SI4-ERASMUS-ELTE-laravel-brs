@@ -42,20 +42,20 @@ return new class extends Migration
             $table->foreign('reader_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
 
             $table->enum('status', ['PENDING', 'REJECTED', 'ACCEPTED', 'RETURNED']);
 
             $table->dateTime('request_processed_at')->nullable();
 
             $table->unsignedBigInteger('request_managed_by')->nullable();
-            $table->foreign('request_managed_by')->references('id')->on('users');
+            $table->foreign('request_managed_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->dateTime('deadline')->nullable();
             $table->dateTime('returned_at')->nullable();
 
             $table->unsignedBigInteger('return_managed_by')->nullable();
-            $table->foreign('return_managed_by')->references('id')->on('users');
+            $table->foreign('return_managed_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

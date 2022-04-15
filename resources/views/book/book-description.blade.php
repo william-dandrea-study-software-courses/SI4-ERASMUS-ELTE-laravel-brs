@@ -30,8 +30,18 @@
 
 
                         @else
+                            <form action="{{ route('delete-book', ['id' => $book['id']]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete book</button>
+                            </form>
+
+
+
                             <button type="button" class="btn btn-secondary">Edit book</button>
-                            <button type="button" class="btn btn-danger">Delete book</button>
+
+
+
                         @endif
 
 
