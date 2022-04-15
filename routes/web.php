@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\VisitorController;
@@ -34,6 +35,8 @@ Route::get('/book/{id}', [BookController::class, 'book']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+
+    Route::post('/borrow/create/{bookId}', [BorrowController::class, 'create'])->name('borrow-new-book');
 });
 
 

@@ -19,7 +19,6 @@ class BookController extends Controller
 
         $book = Book::all()->where('id', $id)->first();
 
-
         $borrowed = null;
         $user = 0;
         if (auth()->user()) {

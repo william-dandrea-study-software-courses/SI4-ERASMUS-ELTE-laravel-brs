@@ -20,7 +20,11 @@
                             @if($borrowed_by_current_user != null)
                                 You borrowed this book, status : {{ $borrowed_by_current_user }}
                             @else
-                                <button type="button" class="btn btn-primary">Borrow book</button>
+                                <form action="{{ route('borrow-new-book', ['bookId' => $book['id']]) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-primary" type="submit">Borrow book</button>
+                                </form>
+
                             @endif
 
 
