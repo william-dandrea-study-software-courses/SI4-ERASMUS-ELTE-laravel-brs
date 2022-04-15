@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
     <div class="m-5">
         {{ $numberOfUsersInTheSystem }} Users in the system <br>
         {{ $numberOfGenres }} Genres in the system<br>

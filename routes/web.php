@@ -27,6 +27,7 @@ Auth::routes();
 Route::get('/books-genre/{id}', [BookController::class, 'byGenre'])->name('books-by-genre');
 Route::get('/books', [BookController::class, 'all'])->name('books');
 Route::get('/book-search/', [BookController::class, 'search'])->name('book-search');
+Route::get('/book/{id}', [BookController::class, 'book']);
 
 
 Route::middleware(['auth'])->group(function () {

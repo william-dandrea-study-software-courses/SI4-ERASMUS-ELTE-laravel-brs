@@ -14,7 +14,15 @@ class BookController extends Controller
 
 
 
+    public function book(Request $request, $id) {
 
+        $book = Book::all()->where('id', $id)->first();
+
+        return view('book.book-description', [
+            'book' => $book,
+        ]);
+
+    }
 
     public function all() {
 
