@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Borrow;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,8 +14,28 @@ class  BorrowController extends Controller
 
     public function select(Request $request, $id) {
 
+        $borrow = Borrow::all()->where('id', '=', $id)->first();
+        $book = Book::all()->where('id', '=', $borrow->reader_id)->first();
+        $reader = User::all()->where('id', '=', $borrow->reader_id)->first();
 
-        return view('rentals.rental');
+        $pendingLibrarian = null;
+        $returnedLibrarian = null;
+
+        if ($borrow->status != 'PENDING') {
+            $pendingLibrarian = User::all()->where('id', '=', $borrow->request_managed_by)->first();
+        }
+
+        if ($borrow->status != 'RETURNED') {
+            $returnedLibrarian = User::all()->where('id', '=', $borrow->return_managed_by)->first();
+        }
+
+        return view('rentals.rental', [
+            'borrow' => $borrow,
+            'book' => $book,
+            'reader' => $reader,
+            'pendingLibrarian' => $pendingLibrarian,
+            'returnedLibrarian' => $returnedLibrarian,
+        ]);
 
     }
 

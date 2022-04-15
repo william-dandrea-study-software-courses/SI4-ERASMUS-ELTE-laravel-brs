@@ -21,6 +21,7 @@ class BookController extends Controller
 
         $borrowed = null;
         $user = 0;
+
         if (auth()->user()) {
             $user = auth()->user()->isLibrarian() ? 2 : 1;
 
