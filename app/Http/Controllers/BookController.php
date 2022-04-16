@@ -9,6 +9,7 @@ use App\Models\Borrow;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
+use Symfony\Component\Console\Input\Input;
 
 class BookController extends Controller
 {
@@ -25,7 +26,14 @@ class BookController extends Controller
     public function store(BookFormRequest $request) {
         $data = $request->validated();
 
-        dd($data->genres);
+
+
+
+        dd($request->input("genres"));
+
+
+
+
 
         Book::create($data);
         return redirect()->route('books');

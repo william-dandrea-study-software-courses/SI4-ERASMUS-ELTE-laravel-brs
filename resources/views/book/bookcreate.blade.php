@@ -77,7 +77,6 @@
                 <input type="checkbox" name="genres[]" value="{{ $option->id }}" {{ $genres->contains('id', $option->id) ? 'checked' : '' }}>{{ $option->name }}
             @endforeach
 
-
             @error('genres[]')
             <div class="invalid-feedback">
                 {{ $message }}

@@ -30,7 +30,7 @@ class BookFormRequest extends FormRequest
             'pages'             => "required|min:1|numeric",
             'isbn'              => "required|regex:/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/i",
             'description'       => "",
-            'genres'            => "required|array|numeric",
+            'genres[]'            => "array|numeric",
             'in_stock'          => "required|min:0|numeric",
 
         ];
