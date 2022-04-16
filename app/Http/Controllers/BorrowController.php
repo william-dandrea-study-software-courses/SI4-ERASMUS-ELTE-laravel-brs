@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BorrowFormRequest;
 use App\Models\Book;
 use App\Models\Borrow;
 use App\Models\User;
@@ -10,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class  BorrowController extends Controller
 {
+
+    public function edit(BorrowFormRequest $request, $borrowId) {
+
+        $borrow = Borrow::findOrFail($borrowId);
+        $borrow->update($request->validated());
+
+        $borrow->update(array('request_managed_by' => auth()->user()->id));
+
+        return redirect()->route('rental', ['id' =>$borrow->id]);
+    }
 
 
     public function librarianManageAllRentals() {
