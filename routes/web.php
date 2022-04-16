@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/book/create', [BookController::class, 'create'])->name('create-book')->middleware('isLibrarian');
+    Route::get('/book/edit/{id}', [BookController::class, 'editPage'])->name('edit-book')->middleware('isLibrarian');
+    Route::put('/book/update/{id}', [BookController::class, 'update'])->name('update-book')->middleware('isLibrarian');
     Route::post('/book/store', [BookController::class, 'store'])->name('store-book')->middleware('isLibrarian');
     Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('delete-book')->middleware('isLibrarian');
 

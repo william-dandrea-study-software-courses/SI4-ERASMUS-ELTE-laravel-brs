@@ -14,6 +14,34 @@ use Symfony\Component\Console\Input\Input;
 class BookController extends Controller
 {
 
+
+    public function editPage($bookId) {
+        $book = Book::findOrFail($bookId);
+
+        $allGenres = Genre::all();
+        $genresUser = $book->genres;
+
+        return view('book.book-edit', [
+            'allGenres' => $allGenres,
+            'genresUser' => $genresUser,
+            'book' => $book,
+        ]);
+
+    }
+
+
+    public function update(BookFormRequest $request, $bookId) {
+
+        $book = Book::findOrFail($bookId);
+        $book->update($request->validated());
+
+        $book->genres()->detach();
+
+        $book->genres()->attach($request->input("genres"));
+
+        return redirect()->route('books');
+    }
+
     public function create() {
         $genres = Genre::all();
 

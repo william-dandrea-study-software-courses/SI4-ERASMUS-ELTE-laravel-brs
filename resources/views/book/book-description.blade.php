@@ -36,9 +36,12 @@
                                 <button type="submit" class="btn btn-danger">Delete book</button>
                             </form>
 
+                            <form action="{{ route('edit-book', ['id' => $book['id']]) }}" method="get">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary">Edit book</button>
+                            </form>
 
 
-                            <button type="button" class="btn btn-secondary">Edit book</button>
 
 
 
