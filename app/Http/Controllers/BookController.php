@@ -26,16 +26,16 @@ class BookController extends Controller
     public function store(BookFormRequest $request) {
         $data = $request->validated();
 
+        // dd($request->input("genres"));
 
-
-
-        dd($request->input("genres"));
-
-
-
-
-
+        // $data->genres()->attach($request->input("genres"));
         Book::create($data);
+
+        $lastBook = Book::all()->last();
+        $lastBook->genres()->attach($request->input("genres"));
+
+
+
         return redirect()->route('books');
     }
 
