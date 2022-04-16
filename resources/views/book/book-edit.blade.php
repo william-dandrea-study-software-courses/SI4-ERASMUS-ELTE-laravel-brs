@@ -98,7 +98,7 @@
 
 
         <div class="form-group  mt-4">
-            <button type="submit" class="btn btn-primary w-100">Add new book</button>
+            <button type="submit" class="btn btn-primary w-100">Ecit book</button>
         </div>
 
     </form>
